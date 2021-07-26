@@ -25,7 +25,7 @@
                 "logProgress": false,
                 "logVerbose": true,
                 "publishContentLink": {
-                    "uri": "https://removebex.blob.core.windows.net/adh/TagDeallocatedVmsAndDisks.ps1?sp=r&st=2021-07-26T09:39:19Z&se=2021-07-26T17:39:19Z&spr=https&sv=2020-08-04&sr=b&sig=WGosGI1OWKfcrmKjPu1563OmP5YnrhUHvl1iptz%2BYQI%3D",
+                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/TagDeallocatedVmsAndDisks_arm_runbook.json",
                     "version": "1"
                 }
             }
