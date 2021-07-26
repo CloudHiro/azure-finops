@@ -25,7 +25,7 @@
                 "logProgress": false,
                 "logVerbose": true,
                 "publishContentLink": {
-                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/TagDeallocatedVmsAndDisks_arm_runbook.json",
+                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/scripts/TagDeallocatedVmsAndDisks.ps1",
                     "version": "1"
                 }
             }
