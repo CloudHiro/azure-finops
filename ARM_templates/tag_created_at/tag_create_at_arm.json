@@ -1,0 +1,55 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "roleGUID": {
+            "type": "string",
+            "metadata" :{
+                "description" : "role with permission to tag"
+            }
+        }
+
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "name": "tag_created_at",
+            "apiVersion": "2019-09-01",
+            "properties": {
+                "displayName": "tag_created_at",
+                "policyType": "Custom",
+                "description": "tag resources with a timestamp on creation",
+                "metadata": {
+                    "category": "General"
+                },
+                "mode": "All",
+                "policyRule": {
+                    "if": {
+                        "allOf": [
+                            {
+                                "field": "tags['created_at']",
+                                "exists": "false"
+                            }
+
+                        ]
+                    },
+                    "then": {
+                        "effect": "modify",
+                        "details": {
+                            "roleDefinitionIds": [
+                                "[concat('/providers/microsoft.authorization/roleDefinitions/',parameters('roleGUID'))]"
+                            ],
+                            "operations": [
+                                {
+                                    "operation": "addOrReplace",
+                                    "field": "tags['created_at']",
+                                    "value": "[utcNow()]"
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
