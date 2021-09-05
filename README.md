@@ -5,6 +5,7 @@ This repository contains Azure ARM templates to create runbooks that run scripts
 * All scripts assume an automation account was created and it has a service principal assigned to it.  
 * the user running the template must be an automation contributor or owner.
 
+
 Deploy to Azure cpu & memory utilization
 [![Deploy To Azure cpu & memory utilization](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fhttps://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/cpu_memory_utilization/cpu_memory_utilization_script.py)
 
