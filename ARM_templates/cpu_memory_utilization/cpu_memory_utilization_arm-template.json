@@ -25,7 +25,7 @@
                 "logProgress": false,
                 "logVerbose": true,
                 "publishContentLink": {
-                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/cpu_memory_utilization/cpu_memory_utilization_script.py",
+                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/cpu_memory_utilization/cpu_memory_utilization_script.json",
                     "version": "1"
                 }
             }
