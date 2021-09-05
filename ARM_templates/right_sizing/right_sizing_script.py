@@ -28,7 +28,7 @@ from azure.mgmt.billing import BillingManagementClient
 from azure.storage.blob import BlobServiceClient
 import datetime ,os
 import csv
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from azure.common.credentials import ServicePrincipalCredentials
 # For vscode login
 # from azure.identity import AzureCliCredential
