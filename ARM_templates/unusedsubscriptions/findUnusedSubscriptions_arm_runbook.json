@@ -23,7 +23,7 @@
                 "logProgress": false,
                 "logVerbose": true,
                 "publishContentLink": {
-                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/scripts/findUnusedSubscriptions.ps1",
+                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/unusedsubscriptions/findUnusedSubscriptions.ps1",
                     "version": "1"
                 }
             }
