@@ -82,70 +82,84 @@ else:
 subscription_client = SubscriptionClient(credential)
 subscription_ids = subscription_client.subscriptions.list()
 
+# Get the connection string to the designated storage account and the name of the blob container for the CSV file
+connection_string = automationassets.get_automation_variable('CONNECTION_STRING').strip()
+blob_container = automationassets.get_automation_variable('BLOB_CONTAINER').strip()
+# Initialzie the blob service client
+blob_service_client = BlobServiceClient.from_connection_string(conn_str=connection_string)
+# Create a blob client object for the CSV file
+blob_client = blob_service_client.get_blob_client(container=blob_container, blob=f'right_sizing_{datetime.now().strftime("%d-%m-%Y_%H:%M:%S")}.csv')
+# Create the CSV file as an append blob object
+blob_client.create_append_blob()
+# Add the header to the CSV file
+blob_client.append_block('Subscription Name,ResourceGroup,Location,Resource id,Previous Size,Current Size,Tags\n'.encode())
+
 # Initiate function to filter vms by tag.
 def tag_is_present(tags_dict):
     return tags_dict and tags_dict.get('right_size') == 'false'
 
-# Iterate through all subs and export data utilization to CSV.
-with open('/home/yahav/right_sizing.csv', 'a') as file:
-    field_names = ['Subscription Name','ResourceGroup','Location','Resource id', 'Previous Size','Current Size','Tags']
-    writer = csv.DictWriter(file, fieldnames=field_names)
-    writer.writeheader()
-    for sub in list(subscription_ids):
-        compute_client = ComputeManagementClient(credential, subscription_id=sub.subscription_id)
-        resource_list = ResourceManagementClient(credential, subscription_id=sub.subscription_id)
-        tagged_vms = [vm for vm in compute_client.virtual_machines.list_all() if tag_is_present(vm.tags)]
-        original_size = {}
-        # Iterate through all tagged vms and get there hardware specs(Memory ,CPU).
-        for vm in tagged_vms:
-            original_size[vm.name] = vm.hardware_profile.vm_size
-            list_vm_sizes = compute_client.virtual_machine_sizes.list(location=vm.location)
-            for vm_size in list_vm_sizes:
-                if (original_size[vm.name]) in vm_size.name:
-                    cores = vm_size.number_of_cores
-                    memory = vm_size.memory_in_mb
-                    size = vm_size.name
-        # Iterate through all available sizes and resize by 2.
-        for vm in tagged_vms:
-            right_size = ""
-            available_sizes = compute_client.virtual_machines.list_available_sizes(resource_group_name=vm.id.split('/')[4],vm_name=vm.name)
-            for a in list(available_sizes):
-                if a.number_of_cores >= cores/2 and a.number_of_cores < cores and a.memory_in_mb >= memory/2 and a.memory_in_mb < memory:
-                    # If vms are in Promo(Preview) size than resize them also to Promo.
-                    if original_size[vm.name].split('_')[-1] == "Promo":
-                        if (len(original_size[vm.name].split('_'))) == len(a.name.split('_')) and a.name.split('_')[1].startswith(original_size[vm.name].split('_')[1][0]) and a.name.split('_')[-2] == original_size[vm.name].split('_')[-2]:
+# # Iterate through all subs and export data utilization to CSV.
+# with open('/home/yahav/right_sizing.csv', 'a') as file:
+#     field_names = ['Subscription Name','ResourceGroup','Location','Resource id', 'Previous Size','Current Size','Tags']
+#     writer = csv.DictWriter(file, fieldnames=field_names)
+#     writer.writeheader()
+for sub in list(subscription_ids):
+    compute_client = ComputeManagementClient(credential, subscription_id=sub.subscription_id)
+    resource_list = ResourceManagementClient(credential, subscription_id=sub.subscription_id)
+    tagged_vms = [vm for vm in compute_client.virtual_machines.list_all() if tag_is_present(vm.tags)]
+    original_size = {}
+    # Iterate through all tagged vms and get there hardware specs(Memory ,CPU).
+    for vm in tagged_vms:
+        original_size[vm.name] = vm.hardware_profile.vm_size
+        list_vm_sizes = compute_client.virtual_machine_sizes.list(location=vm.location)
+        for vm_size in list_vm_sizes:
+            if (original_size[vm.name]) in vm_size.name:
+                cores = vm_size.number_of_cores
+                memory = vm_size.memory_in_mb
+                size = vm_size.name
+    # Iterate through all available sizes and resize by 2.
+    for vm in tagged_vms:
+        right_size = ""
+        available_sizes = compute_client.virtual_machines.list_available_sizes(resource_group_name=vm.id.split('/')[4],vm_name=vm.name)
+        for a in list(available_sizes):
+            if a.number_of_cores >= cores/2 and a.number_of_cores < cores and a.memory_in_mb >= memory/2 and a.memory_in_mb < memory:
+                # If vms are in Promo(Preview) size than resize them also to Promo.
+                if original_size[vm.name].split('_')[-1] == "Promo":
+                    if (len(original_size[vm.name].split('_'))) == len(a.name.split('_')) and a.name.split('_')[1].startswith(original_size[vm.name].split('_')[1][0]) and a.name.split('_')[-2] == original_size[vm.name].split('_')[-2]:
+                        if all(l[0] == l[1] for l in zip(original_size[vm.name], a.name) if not l[0].isdigit()):
+                            right_size = a.name
+                            break
+                # If vms are not in Promo(Preview) size than resize them to regular size.
+                elif (len(original_size[vm.name].split('_'))) == len(a.name.split('_')) and a.name.split('_')[1].startswith(original_size[vm.name].split('_')[1][0]):
+                    if (len(original_size[vm.name].split('_'))) == 4 and a.name.split('_')[-1] == original_size[vm.name].split('_')[-1] and a.name.split('_')[-2] == original_size[vm.name].split('_')[-2]:
+                        if all(l[0] == l[1] for l in zip(original_size[vm.name], a.name) if not l[0].isdigit()):
+                            right_size = a.name
+                            break
+                    if (len(original_size[vm.name].split('_'))) == 3:
+                        if a.name.split('_')[-1] == original_size[vm.name].split('_')[-1]:
                             if all(l[0] == l[1] for l in zip(original_size[vm.name], a.name) if not l[0].isdigit()):
                                 right_size = a.name
                                 break
-                    # If vms are not in Promo(Preview) size than resize them to regular size.
-                    elif (len(original_size[vm.name].split('_'))) == len(a.name.split('_')) and a.name.split('_')[1].startswith(original_size[vm.name].split('_')[1][0]):
-                        if (len(original_size[vm.name].split('_'))) == 4 and a.name.split('_')[-1] == original_size[vm.name].split('_')[-1] and a.name.split('_')[-2] == original_size[vm.name].split('_')[-2]:
-                            if all(l[0] == l[1] for l in zip(original_size[vm.name], a.name) if not l[0].isdigit()):
-                                right_size = a.name
-                                break
-                        if (len(original_size[vm.name].split('_'))) == 3:
-                            if a.name.split('_')[-1] == original_size[vm.name].split('_')[-1]:
-                                if all(l[0] == l[1] for l in zip(original_size[vm.name], a.name) if not l[0].isdigit()):
-                                    right_size = a.name
-                                    break
-                        if (len(original_size[vm.name].split('_'))) == 2:
-                            if all(l[0] == l[1] for l in zip(original_size[vm.name], a.name) if not l[0].isdigit()):
-                                right_size = a.name
-                                break
-            # If there is no options to resize the vm and export to CSV.
-            if not right_size:
-                writer.writerow({'Resource id': vm.id,'Current Size': original_size[vm.name]})
-                print(f"No Available Resize For The VM: '{vm.name}'")
-            # Resize the vm and export all the data into CSV.
+                    if (len(original_size[vm.name].split('_'))) == 2:
+                        if all(l[0] == l[1] for l in zip(original_size[vm.name], a.name) if not l[0].isdigit()):
+                            right_size = a.name
+                            break
+        # If there is no options to resize the vm and export to CSV.
+        if not right_size:
+            blob_client.append_block(f"{sub.display_name},{vm.id.split('/')[4]},{vm.location},{vm.id},{original_size[vm.name]},{right_size},{vm.tags}\n".encode())
+            # writer.writerow({'Resource id': vm.id,'Current Size': original_size[vm.name]})
+            print(f"No Available Resize For The VM: '{vm.name}'")
+        # Resize the vm and export all the data into CSV.
+        else:
+            vm_resize = compute_client.virtual_machines.begin_update(resource_group_name=vm.id.split('/')[4],vm_name=vm.name,parameters={'location': vm.location, 'hardware_profile':{'vm_size': right_size}})
+            vm_log = compute_client.virtual_machines.get(resource_group_name=vm.id.split('/')[4],vm_name=vm.name)
+            # Validate if the vm changed her size and print
+            if vm_log.hardware_profile.vm_size == right_size:
+                # writer.writerow({'Subscription Name': sub.display_name,'ResourceGroup': vm_log.id.split('/')[4],'Location': vm_log.location, 'Resource id': vm.id,'Previous Size': original_size[vm_log.name],'Current Size': right_size,'Tags': vm_log.tags})
+                blob_client.append_block(f"{sub.display_name},{vm.id.split('/')[4]},{vm_log.location},{vm.id},{original_size[vm.name]},{right_size},{vm_log.tags}\n".encode())
+                print(f"Vm Name:'{vm_log.name}' Changed from {original_size[vm_log.name]} To {right_size}")
             else:
-                vm_resize = compute_client.virtual_machines.begin_update(resource_group_name=vm.id.split('/')[4],vm_name=vm.name,parameters={'location': vm.location, 'hardware_profile':{'vm_size': right_size}})
-                vm_log = compute_client.virtual_machines.get(resource_group_name=vm.id.split('/')[4],vm_name=vm.name)
-                # Validate if the vm changed her size and print
-                if vm_log.hardware_profile.vm_size == right_size:
-                    writer.writerow({'Subscription Name': sub.display_name,'ResourceGroup': vm_log.id.split('/')[4],'Location': vm_log.location, 'Resource id': vm.id,'Previous Size': original_size[vm_log.name],'Current Size': right_size,'Tags': vm_log.tags})
-                    print(f"Vm Name:'{vm_log.name}' Changed from {original_size[vm_log.name]} To {right_size}")
-                else:
-                    print(f"Falied to change {vm_log.name} size.")
+                print(f"Falied to change {vm_log.name} size.")
 
 
 
