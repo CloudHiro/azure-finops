@@ -30,7 +30,7 @@ import csv
 from datetime import date, timedelta
 from azure.common.credentials import ServicePrincipalCredentials
 # For vscode login
-from azure.identity import AzureCliCredential
+# from azure.identity import AzureCliCredential
 from isodate.isostrf import DATE_BAS_ORD_COMPLETE
 import adal
 
