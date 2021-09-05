@@ -7,7 +7,7 @@ This repository contains Azure ARM templates to create runbooks that run scripts
 
 Deploy to Azure right sizing:
 
-[![Deploy To Azure right_sizing](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Fcpu_memory_utilization%2Fright_sizing_arm-template.json)
+[![Deploy To Azure right_sizing](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Fright_sizing%2Fright_sizing_arm-template.json)
 
 
 Deploy to Azure cpu & memory utilization:
