@@ -25,6 +25,7 @@ from azure.mgmt.resource import SubscriptionClient, subscriptions
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.compute import ComputeManagementClient
 from azure.mgmt.billing import BillingManagementClient
+from azure.storage.blob import BlobServiceClient
 import datetime ,os
 import csv
 from datetime import date, timedelta
