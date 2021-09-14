@@ -157,7 +157,7 @@ lt_50 = "False"
 #     field_names = ['Resource id', 'Average CPU', 'Maximum CPU', 'Average Memory', 'Maximum Memory', 'Vm Size', 'Region',
 #                    'LT 50%']
 #     writer = csv.DictWriter(file, fieldnames=field_names)
-    writer.writeheader()
+#     writer.writeheader()
 for sub in subscription_ids:
     compute_client = ComputeManagementClient(credential, subscription_id=sub.subscription_id)
     monitor_client = MonitorManagementClient(credential, subscription_id=sub.subscription_id)
