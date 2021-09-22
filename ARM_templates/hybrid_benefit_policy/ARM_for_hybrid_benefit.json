@@ -73,8 +73,14 @@
             ]
           },
           "then": {
-            "effect": "audit"
-          }
+            "effect": "append",
+            "details": {
+
+                "field": "Microsoft.Compute/licenseType",
+                "value": "Windows_Server"
+               }
+
+            }
         }
       }
     },
