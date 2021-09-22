@@ -29,7 +29,7 @@ from azure.common.credentials import ServicePrincipalCredentials
 # For Azure portal login
 # import automationassets
 # For vscode login
-from azure.identity import AzureCliCredential
+# from azure.identity import AzureCliCredential
 from isodate.isostrf import DATE_BAS_ORD_COMPLETE
 import adal
 
@@ -86,6 +86,18 @@ today = date.today()
 last_two_weeks = today - datetime.timedelta(days=14)
 
 
+# Get the connection string to the designated storage account and the name of the blob container for the CSV file
+connection_string = automationassets.get_automation_variable('CONNECTION_STRING').strip()
+blob_container = automationassets.get_automation_variable('BLOB_CONTAINER').strip()
+# Initialzie the blob service client
+blob_service_client = BlobServiceClient.from_connection_string(conn_str=connection_string)
+# Create a blob client object for the CSV file
+blob_client = blob_service_client.get_blob_client(container=blob_container, blob=f'cpu_memory_utilization_{datetime.now().strftime("%d-%m-%Y_%H:%M:%S")}.csv')
+# Create the CSV file as an append blob object
+blob_client.create_append_blob()
+# Add the header to the CSV file
+blob_client.append_block('Resource id,Average CPU,Maximum CPU,Average Memory,Maximum Memory,Vm Size,Region,LT 50%\n'.encode())
+
 # Monitor function for vms by cpu.
 def fetch_metrics_cpu(monitor_client, resource_id, interval='PT24H'):
     metrics_data = monitor_client.metrics.list(
@@ -141,37 +153,38 @@ def fetch_metrics_memory(monitor_client, resource_id, interval='PT24H'):
 lt_50 = "False"
 
 # Iterate all vms and export data utilization to CSV.
-with open('/home/yahav/cpu_memory_utilization_average.csv', 'a') as file:
-    field_names = ['Resource id', 'Average CPU', 'Maximum CPU', 'Average Memory', 'Maximum Memory', 'Vm Size', 'Region',
-                   'LT 50%']
-    writer = csv.DictWriter(file, fieldnames=field_names)
-    writer.writeheader()
-    for sub in list(subscription_ids):
-        compute_client = ComputeManagementClient(credential, subscription_id=sub.subscription_id)
-        monitor_client = MonitorManagementClient(credential, subscription_id=sub.subscription_id)
-        resource_client = ResourceManagementClient(credential, subscription_id=sub.subscription_id)
+# with open('/home/yahav/cpu_memory_utilization_average.csv', 'a') as file:
+#     field_names = ['Resource id', 'Average CPU', 'Maximum CPU', 'Average Memory', 'Maximum Memory', 'Vm Size', 'Region',
+#                    'LT 50%']
+#     writer = csv.DictWriter(file, fieldnames=field_names)
+#     writer.writeheader()
+for sub in subscription_ids:
+    compute_client = ComputeManagementClient(credential, subscription_id=sub.subscription_id)
+    monitor_client = MonitorManagementClient(credential, subscription_id=sub.subscription_id)
+    resource_client = ResourceManagementClient(credential, subscription_id=sub.subscription_id)
 
-        vm_list = compute_client.virtual_machines.list_all()
-        for vm in list(vm_list):
-            vm_list_size = compute_client.virtual_machine_sizes.list(vm.location)
-            for vm_size in list(vm_list_size):
-                if vm.hardware_profile.vm_size in vm_size.name:
-                    fetch_data_cpu = fetch_metrics_cpu(monitor_client, vm.id)
-                    fetch_data_memory = fetch_metrics_memory(monitor_client, vm.id)
-                    # Check if Maximum CPU and Maximum Memory are less than 50% in use - if yes than tag them with {'right_size': 'true'}.
-                    if (fetch_data_cpu[2] < 50) and ((fetch_data_memory[1] / vm_size.memory_in_mb) * 100 < 50):
-                        lt_50 = "True"
-                        body = {
-                            'operation': 'Merge',
-                            "properties": {
-                                'tags':
-                                    {'right_size': 'true'},
-                            }
+    vm_list = compute_client.virtual_machines.list_all()
+    for vm in list(vm_list):
+        vm_list_size = compute_client.virtual_machine_sizes.list(vm.location)
+        for vm_size in list(vm_list_size):
+            if vm.hardware_profile.vm_size in vm_size.name:
+                fetch_data_cpu = fetch_metrics_cpu(monitor_client, vm.id)
+                fetch_data_memory = fetch_metrics_memory(monitor_client, vm.id)
+                # Check if Maximum CPU and Maximum Memory are less than 50% in use - if yes than tag them with {'right_size': 'true'}.
+                if (fetch_data_cpu[2] < 50) and ((fetch_data_memory[1] / vm_size.memory_in_mb) * 100) < 50:
+                    lt_50 = "True"
+                    body = {
+                        "operation": "Merge",
+                        "properties": {
+                            "tags":
+                                {'right_size': 'true'},
                         }
-                        vm_tagging = resource_client.tags.update_at_scope(vm.id, body)
-                    writer.writerow({'Resource id': fetch_data_cpu[0], 'Average CPU': fetch_data_cpu[1],
-                                     'Maximum CPU': fetch_data_cpu[2],
-                                     'Average Memory': (fetch_data_memory[0] / vm_size.memory_in_mb) * 100,
-                                     'Maximum Memory': fetch_data_memory[1], 'Vm Size': vm.hardware_profile.vm_size,
-                                     'Region': vm.location,
-                                     'LT 50%': lt_50})
+                    }
+                    # vm_tagging = resource_client.tags.update_at_scope(vm.id, body)
+                blob_client.append_block(f"{fetch_data_cpu[0]},{fetch_data_cpu[1]},{fetch_data_cpu[2]},{(fetch_data_memory[0] / vm_size.memory_in_mb) * 100},{fetch_data_memory[1]},{vm.hardware_profile.vm_size},{vm.location},{lt_50}\n".encode())
+                # writer.writerow({'Resource id': fetch_data_cpu[0], 'Average CPU': fetch_data_cpu[1],
+                                    # 'Maximum CPU': fetch_data_cpu[2],
+                                    # 'Average Memory': (fetch_data_memory[0] / vm_size.memory_in_mb) * 100,
+                                    # 'Maximum Memory': fetch_data_memory[1], 'Vm Size': vm.hardware_profile.vm_size,
+                                    # 'Region': vm.location,
+                                    # 'LT 50%': lt_50})

@@ -15,15 +15,15 @@
         {
             "apiVersion": "2019-06-01",
             "type": "Microsoft.Automation/automationAccounts/runbooks",
-            "name": "[concat(parameters('automationAccountName'), '/findUnusedSubscriptions')]",
+            "name": "[concat(parameters('automationAccountName'), '/Get-UnusedSubscriptions')]",
             "location": "[resourceGroup().location]",
             "properties": {
-                "description": "a runbook to find unused subscriptions",
+                "description": "a runbook to find and get unused subscriptions",
                 "runbookType": "PowerShell",
                 "logProgress": false,
                 "logVerbose": true,
                 "publishContentLink": {
-                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/unusedsubscriptions/findUnusedSubscriptions.ps1",
+                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/unused_subscriptions/Get-UnusedSubscriptions.ps1",
                     "version": "1"
                 }
             }

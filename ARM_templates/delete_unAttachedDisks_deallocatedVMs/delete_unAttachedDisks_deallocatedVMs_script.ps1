@@ -53,38 +53,42 @@ try {
         $subscriptionName = $_.Name
         Write-Output ('Switching to subscription: {0}' -f $_.Name)
         $null = Set-AzContext -SubscriptionObject $_ -Force
-
-
+    
+          
 
         $tagname = "Candidate"
         $TagValue = "DeleteMe"
         $taggedResourcesVms = Get-AzResource -ResourceType Microsoft.Compute/virtualMachines -TagName $tagname -TagValue $TagValue
         $taggedResourcesDisks = Get-AzResource -ResourceType Microsoft.Compute/Disks -TagName $tagname -TagValue $TagValue
 
-
-
+        
     # Iterate all Vms with specific tag key 'bla'(replace bla with your key name you want to filter out!)
         foreach ( $resource in $taggedResourcesVms) {
             if (!$resource.tags.bla) {
+                $vmSize = Get-AzVM -ResourceGroupName $resource.ResourceGroupName -Name $resource.Name
+                $tags = $resource.Tags.GetEnumerator() | ForEach-Object {"$($_.Key): $($_.Value)"} 
+                $blobStorage.ICloudBlob.AppendText("$subscriptionName, $($resource.ResourceGroupName), $($resource.location), $($resource.ResourceId), $($vmSize.HardwareProfile.VmSize), $($tags)`n")
+                Write-Output('will remove {0} resources' -f $resource.Count) 
                 Remove-AzResource -ResourceId $resource.Id -Force
-                $blobStorage.ICloudBlob.AppendText("$subscriptionName, $($resource.ResourceGroupName), $($resource.location), $($resource.ResourceId), $($resource.Tags)`n")
-                Write-Output('will remove {0} resources' -f $resource.Count)
 
+                
             }
         }
     # Iterate all Disks with specific tag key 'bla' (replace bla with your key name you want to filter out!)
         foreach ( $resource in $taggedResourcesDisks) {
             if (!$resource.tags.bla) {
-                Remove-AzResource -ResourceId $resource.Id -Force
-                $diskInfo = Get-AzDisk -ResourceGroupName $resource.ResourceGroupName -DiskName $resource.Name
-                $blobStorage.ICloudBlob.AppendText("$subscriptionName, $($resource.ResourceGroupName), $($resource.location), $($resource.ResourceId), $($diskInfo.DiskSizeGB), $($resource.Tags)`n")
+                $excludeAttachedDisks = "Attached"
+                $tags = $resource.Tags.GetEnumerator() | ForEach-Object {"$($_.Key): $($_.Value)"} 
+                $diskInfo = Get-AzDisk -ResourceGroupName $resource.ResourceGroupName -DiskName $resource.Name | Where-Object {$excludeAttachedDisks -notcontains $_.DiskState}
+                $blobStorage.ICloudBlob.AppendText("$subscriptionName, $($resource.ResourceGroupName), $($resource.location), $($resource.ResourceId), $($diskInfo.DiskSizeGB), $($tags)`n")
                 Write-Output('will remove {0} resources' -f $resource.Count)
+                Remove-AzResource -ResourceId $diskInfo.Id -Force
             }
         }
-
+        
     }
 }
-
+    
 
 catch {
     Write-Output ($_)
