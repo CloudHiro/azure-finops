@@ -72,15 +72,23 @@
               }
             ]
           },
-          "then": {
-            "effect": "append",
-            "details": {
-
-                "field": "Microsoft.Compute/licenseType",
-                "value": "Windows_Server"
-               }
-
+      "then": {
+        "effect": "modify",
+        "details": {
+          "roleDefinitionIds": [
+            "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+          ],
+          "conflictEffect": "audit",
+          "operations": [
+            {
+              "condition": "[greaterOrEquals(requestContext().apiVersion, '2019-04-01')]",
+              "operation": "addOrReplace",
+              "field": "Microsoft.Compute/virtualMachines/licenseType",
+              "value": "Windows_Server"
             }
+          ]
+        }
+      }
         }
       }
     },
