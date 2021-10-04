@@ -60,7 +60,7 @@
           "conflictEffect": "audit",
           "operations": [
             {
-              "condition": "[greaterOrEquals(requestContext().apiVersion, '2019-04-01')]",
+              
               "operation": "addOrReplace",
               "field": "Microsoft.Sql/servers/databases/licenseType",
               "value": "BasePrice"
