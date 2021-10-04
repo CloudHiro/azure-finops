@@ -76,6 +76,10 @@
         "apiVersion": "2020-03-01",
         "name": "Hybrid Benefit For SQL",
         "properties": {
+                      "identity": {
+            "location": "eastus",
+            "type": "SystemAssigned"
+          },
           "scope": "[variables('mgScope')]",
           "policyDefinitionId": "[extensionResourceId(variables('mgScope'), 'Microsoft.Authorization/policyDefinitions', variables('policyDefinitionName'))]"
         },
