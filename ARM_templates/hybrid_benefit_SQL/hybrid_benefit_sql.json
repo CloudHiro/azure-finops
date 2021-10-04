@@ -14,12 +14,18 @@
         "metadata": {
           "description": "Target Management Group"
         }
+      },
+        "Policy_Name": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the policy"
+        }
       }
     },
     "functions": [],
     "variables": {
       "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]",
-      "policyDefinitionName": "LocationRestriction"
+      "policyDefinitionName": "[parameters('Policy_Name')]"
     },
     "resources": [
       {
