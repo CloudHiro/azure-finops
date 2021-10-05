@@ -9,6 +9,7 @@ Deploy to azure Hybrid benefit(SQL-Managed instance) policy:
 [![Deploy to azure Hybrid benefit(SQL-Managed instance)](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fhybrid_benefit_SQL_managed_instance%2Fhybrid_benefit_SQL_managed_instance.json)
 
 
+
 Deploy to azure Hybrid benefit(SQL) policy:      
 [![Deploy to azure Hybrid benefit(SQL) policy](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fhybrid_benefit_SQL%2Fhybrid_benefit_sql.json)
 
