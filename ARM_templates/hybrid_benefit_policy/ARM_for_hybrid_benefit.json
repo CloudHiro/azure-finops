@@ -14,12 +14,24 @@
       "metadata": {
         "description": "Target Management Group"
       }
+    },
+    "Policy_Name": {
+     "type": "string",
+      "metadata": {
+        "description": "Name of the policy"
+      }
+    },
+      "role_defenition": {
+      "type": "string",
+      "metadata": {
+        "description": "Role definition ID to apply"
+      }
     }
   },
   "functions": [],
   "variables": {
     "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]",
-    "policyDefinitionName": "LocationRestriction"
+    "policyDefinitionName": "[parameters('Policy_Name')]"
   },
   "resources": [
     {
@@ -76,7 +88,7 @@
         "effect": "modify",
         "details": {
           "roleDefinitionIds": [
-            "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+            "[parameters('role_defenition')]"
           ],
           "conflictEffect": "audit",
           "operations": [
@@ -96,6 +108,10 @@
       "type": "Microsoft.Authorization/policyAssignments",
       "apiVersion": "2020-03-01",
       "name": "Hybrid Benefit",
+      "location": "eastus",
+      "identity": {
+        "type": "SystemAssigned"
+      },
       "properties": {
         "scope": "[variables('mgScope')]",
         "policyDefinitionId": "[extensionResourceId(variables('mgScope'), 'Microsoft.Authorization/policyDefinitions', variables('policyDefinitionName'))]"
