@@ -41,7 +41,7 @@
             "name": "[parameters('Policy_Name')]",
             "apiVersion": "2019-09-01",
             "properties": {
-                "displayName": "tag_created_at",
+                "displayName": "[parameters('Policy_Name')]",
                 "policyType": "Custom",
                 "description": "tag resources with a timestamp on creation",
                 "metadata": {
