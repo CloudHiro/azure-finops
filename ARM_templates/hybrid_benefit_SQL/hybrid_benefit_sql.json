@@ -85,10 +85,10 @@
       },
       "properties": {
         "scope": "[variables('mgScope')]",
-        "policyDefinitionId": "[extensionResourceId(variables('mgScope'), 'Microsoft.Authorization/policyDefinitions', variables('policyDefinitionName'))]"
+        "policyDefinitionId": "[extensionResourceId(variables('mgScope'), 'Microsoft.Authorization/policyDefinitions', parameters('Policy_Name'))]"
       },
       "dependsOn": [
-        "[format('Microsoft.Authorization/policyDefinitions/{0}', variables('policyDefinitionName'))]"
+        "[format('Microsoft.Authorization/policyDefinitions/{0}', parameters('Policy_Name'))]"
       ]
     }
   ]
