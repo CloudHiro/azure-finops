@@ -5,21 +5,24 @@
         "automationAccountName": {
             "type": "string",
             "metadata": {
-                "description" : "automation account name..."
+                "description": "automation account name..."
             }
 
         },
-        "parameters": {
-  "location": {
-    "type": "string",
-    "defaultValue": "[resourceGroup().location]"
-  }
-}
 
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "location for the runbook"
+            },
+            "defaultValue": "[resourceGroup().location]"
+        }
     },
 
 
-    "resources" : [
+
+
+    "resources": [
         {
             "apiVersion": "2019-06-01",
             "type": "Microsoft.Automation/automationAccounts/runbooks",
