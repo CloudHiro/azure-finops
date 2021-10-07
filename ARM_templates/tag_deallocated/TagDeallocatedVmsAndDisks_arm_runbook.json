@@ -14,8 +14,7 @@
             "type": "string",
             "metadata": {
                 "description": "location for the runbook"
-            },
-            "defaultValue": "[resourceGroup().location]"
+            }
         }
     },
 
