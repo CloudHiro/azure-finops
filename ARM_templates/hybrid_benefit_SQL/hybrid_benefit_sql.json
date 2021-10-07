@@ -20,6 +20,12 @@
       "metadata": {
         "description": "Name of the policy"
       }
+    },
+    "role_defenition": {
+      "type": "string",
+      "metadata": {
+        "description": "Role definition ID to apply"
+      }
     }
   },
   "functions": [],
@@ -55,7 +61,7 @@
             "effect": "modify",
             "details": {
               "roleDefinitionIds": [
-                "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+                 "[parameters('role_defenition')]"
               ],
               "conflictEffect": "audit",
               "operations": [
