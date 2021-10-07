@@ -154,7 +154,7 @@
             "location": "[parameters('automationRegion')]",
             "properties": {
                 "contentLink": {
-                  "uri": "https://cloudteam-arm-templates.s3.amazonaws.com/autoscale-vmss/azure_storage_blob-12.8.1-py2.py3-none-any.whl"
+                  "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/auto_scale_vmss/armTemplateAutoScaleVMSSRunbook.json"
                 }
               }
         },
