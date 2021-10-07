@@ -25,7 +25,7 @@
                         "metadata": {
                 "description": "Target Management Group"
             },
-            "defaultValue": "[utcNow()]"
+            "defaultValue": "[utcNow('d')]"
             
             
         }
