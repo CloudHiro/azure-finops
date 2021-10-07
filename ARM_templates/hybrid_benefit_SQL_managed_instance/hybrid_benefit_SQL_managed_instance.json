@@ -78,7 +78,7 @@
       {
         "type": "Microsoft.Authorization/policyAssignments",
         "apiVersion": "2020-03-01",
-        "name": "Hybrid Benefit For SQL Managed Instance",
+        "name": "Hybrid Benefit-SQL-Managed-Instance",
         "location": "eastus",
         "identity": {
           "type": "SystemAssigned"
