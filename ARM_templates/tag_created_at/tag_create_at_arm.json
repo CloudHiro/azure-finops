@@ -1,8 +1,8 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-08-01/managementGroupDeploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "roleGUID": {
+        "role_defenition": {
             "type": "string",
             "metadata" :{
                 "description" : "role with permission to tag"
@@ -37,7 +37,7 @@
                         "effect": "modify",
                         "details": {
                             "roleDefinitionIds": [
-                                "[concat('/providers/microsoft.authorization/roleDefinitions/',parameters('roleGUID'))]"
+                                "[parameters('role_defenition')]"
                             ],
                             "operations": [
                                 {
