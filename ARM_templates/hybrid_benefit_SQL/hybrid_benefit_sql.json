@@ -20,18 +20,23 @@
       "metadata": {
         "description": "Name of the policy"
       }
+    },
+    "role_defenition": {
+      "type": "string",
+      "metadata": {
+        "description": "Role definition ID to apply"
+      }
     }
   },
   "functions": [],
   "variables": {
-    "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]",
-    "policyDefinitionName": "[parameters('Policy_Name')]"
+    "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]"
   },
   "resources": [
     {
       "type": "Microsoft.Authorization/policyDefinitions",
       "apiVersion": "2020-03-01",
-      "name": "[variables('policyDefinitionName')]",
+      "name": "[parameters('Policy_Name')]",
       "properties": {
         "policyType": "Custom",
         "mode": "All",
@@ -55,7 +60,7 @@
             "effect": "modify",
             "details": {
               "roleDefinitionIds": [
-                "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+                 "[parameters('role_defenition')]"
               ],
               "conflictEffect": "audit",
               "operations": [
@@ -73,17 +78,17 @@
     {
       "type": "Microsoft.Authorization/policyAssignments",
       "apiVersion": "2020-03-01",
-      "name": "Hybrid Benefit For SQL",
+      "name": "[parameters('Policy_Name')]",
       "location": "eastus",
       "identity": {
         "type": "SystemAssigned"
       },
       "properties": {
         "scope": "[variables('mgScope')]",
-        "policyDefinitionId": "[extensionResourceId(variables('mgScope'), 'Microsoft.Authorization/policyDefinitions', variables('policyDefinitionName'))]"
+        "policyDefinitionId": "[extensionResourceId(variables('mgScope'), 'Microsoft.Authorization/policyDefinitions', parameters('Policy_Name'))]"
       },
       "dependsOn": [
-        "[format('Microsoft.Authorization/policyDefinitions/{0}', variables('policyDefinitionName'))]"
+        "[format('Microsoft.Authorization/policyDefinitions/{0}', parameters('Policy_Name'))]"
       ]
     }
   ]

@@ -30,14 +30,13 @@
   },
   "functions": [],
   "variables": {
-    "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]",
-    "policyDefinitionName": "[parameters('Policy_Name')]"
+    "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]"
   },
   "resources": [
     {
       "type": "Microsoft.Authorization/policyDefinitions",
       "apiVersion": "2020-03-01",
-      "name": "[variables('policyDefinitionName')]",
+      "name": "[parameters('Policy_Name')]",
       "properties": {
         "policyType": "Custom",
         "mode": "All",
@@ -93,7 +92,6 @@
           "conflictEffect": "audit",
           "operations": [
             {
-              "condition": "[greaterOrEquals(requestContext().apiVersion, '2019-04-01')]",
               "operation": "addOrReplace",
               "field": "Microsoft.Compute/virtualMachines/licenseType",
               "value": "Windows_Server"
@@ -107,17 +105,17 @@
     {
       "type": "Microsoft.Authorization/policyAssignments",
       "apiVersion": "2020-03-01",
-      "name": "Hybrid Benefit",
+      "name": "[parameters('Policy_Name')]",
       "location": "eastus",
       "identity": {
         "type": "SystemAssigned"
       },
       "properties": {
         "scope": "[variables('mgScope')]",
-        "policyDefinitionId": "[extensionResourceId(variables('mgScope'), 'Microsoft.Authorization/policyDefinitions', variables('policyDefinitionName'))]"
+        "policyDefinitionId": "[extensionResourceId(variables('mgScope'), 'Microsoft.Authorization/policyDefinitions', parameters('Policy_Name'))]"
       },
       "dependsOn": [
-        "[format('Microsoft.Authorization/policyDefinitions/{0}', variables('policyDefinitionName'))]"
+        "[format('Microsoft.Authorization/policyDefinitions/{0}', parameters('Policy_Name'))]"
       ]
     }
   ]
