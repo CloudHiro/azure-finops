@@ -141,10 +141,10 @@
                 },
                 "parameters": {
                     "targetMG": {
-                        "value": "[parameters('targetMG').mgmt_for_hb_vms]"
+                        "value": "[parameters('targetMG').mgmt_for_created_by]"
                     },
                     "Policy_Name": {
-                        "value": "[parameters('Policy_Name').policy_name_hb_vms]"
+                        "value": "[parameters('Policy_Name').policy_name_created_by]"
                     },
                     "role_defenition": {
                         "value": "[parameters('role_defenition')]"
