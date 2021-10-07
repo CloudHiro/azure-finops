@@ -105,7 +105,7 @@
     {
       "type": "Microsoft.Authorization/policyAssignments",
       "apiVersion": "2020-03-01",
-      "name": "Hybrid Benefit",
+      "name": "[parameters('Policy_Name')]",
       "location": "eastus",
       "identity": {
         "type": "SystemAssigned"
