@@ -19,6 +19,15 @@
             "metadata": {
                 "description": "Target Management Group"
             }
+        },
+        "utcNow": {
+            "type": "string",
+                        "metadata": {
+                "description": "Target Management Group"
+            },
+            "defaultValue": "[utcNow()]"
+            
+            
         }
     },
     "functions": [],
@@ -59,7 +68,7 @@
                                 {
                                     "operation": "addOrReplace",
                                     "field": "tags['created_at']",
-                                    "value": "[utcNow()]"
+                                    "value": "[parameters('utcNow')]"
                                 }
                             ]
                         }
