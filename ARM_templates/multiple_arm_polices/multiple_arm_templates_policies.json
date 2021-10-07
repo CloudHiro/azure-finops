@@ -10,7 +10,8 @@
             "defaultValue": {
                 "mgmt_for_hb_sql": "",
                 "mgmt_for_hb_vms": "",
-                "mgmt_for_hb": ""
+                "mgmt_for_hb": "",
+                "mgmt_for_created_by":""
 
             }
         },
@@ -22,7 +23,8 @@
             "defaultValue": {
                 "policy_name_hb_sql": "",
                 "policy_name_hb_vms": "",
-                "policy_name__hb_managed_sql": ""
+                "policy_name__hb_managed_sql": "",
+                "policy_name_created_by": ""
 
             }
         },
@@ -122,7 +124,7 @@
                 }
             }
         },
-                {
+        {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2021-04-01",
             "name": "linkedTemplate-4",
@@ -138,6 +140,12 @@
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
+                    "targetMG": {
+                        "value": "[parameters('targetMG').mgmt_for_hb_vms]"
+                    },
+                    "Policy_Name": {
+                        "value": "[parameters('Policy_Name').policy_name_hb_vms]"
+                    },
                     "role_defenition": {
                         "value": "[parameters('role_defenition')]"
                     }
