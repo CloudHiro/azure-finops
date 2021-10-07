@@ -23,13 +23,13 @@
     },
     "functions": [],
     "variables": {
-        "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]"
+        "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]",
     },
 
     "resources": [
         {
             "type": "Microsoft.Authorization/policyDefinitions",
-            "name": "tag_created_at",
+            "name": "[parameters('Policy_Name')]",
             "apiVersion": "2019-09-01",
             "properties": {
                 "displayName": "tag_created_at",
