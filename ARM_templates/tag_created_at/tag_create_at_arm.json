@@ -4,12 +4,28 @@
     "parameters": {
         "role_defenition": {
             "type": "string",
-            "metadata" :{
-                "description" : "role with permission to tag"
+            "metadata": {
+                "description": "role with permission to tag"
+            }
+        },
+        "Policy_Name": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the policy"
+            }
+        },
+        "targetMG": {
+            "type": "string",
+            "metadata": {
+                "description": "Target Management Group"
             }
         }
-
     },
+    "functions": [],
+    "variables": {
+        "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]"
+    },
+
     "resources": [
         {
             "type": "Microsoft.Authorization/policyDefinitions",
@@ -50,6 +66,22 @@
                     }
                 }
             }
+        },
+        {
+            "type": "Microsoft.Authorization/policyAssignments",
+            "apiVersion": "2020-03-01",
+            "name": "[parameters('Policy_Name')]",
+            "location": "eastus",
+            "identity": {
+                "type": "SystemAssigned"
+            },
+            "properties": {
+                "scope": "[variables('mgScope')]",
+                "policyDefinitionId": "[extensionResourceId(variables('mgScope'), 'Microsoft.Authorization/policyDefinitions', parameters('Policy_Name'))]"
+            },
+            "dependsOn": [
+                "[format('Microsoft.Authorization/policyDefinitions/{0}', parameters('Policy_Name'))]"
+            ]
         }
     ]
-}
+} 
