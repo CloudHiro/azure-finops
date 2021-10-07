@@ -30,14 +30,13 @@
     },
     "functions": [],
     "variables": {
-      "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]",
-      "policyDefinitionName": "[parameters('Policy_Name')]"
+      "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]"
     },
     "resources": [
       {
         "type": "Microsoft.Authorization/policyDefinitions",
         "apiVersion": "2020-03-01",
-        "name": "[variables('policyDefinitionName')]",
+        "name": "[parameters('Policy_Name')]",
         "properties": {
           "policyType": "Custom",
           "mode": "All",
