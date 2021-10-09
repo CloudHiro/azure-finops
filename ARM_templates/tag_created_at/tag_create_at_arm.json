@@ -32,7 +32,7 @@
     },
     "functions": [],
     "variables": {
-        "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]",
+        "mgScope": "[tenantResourceId('Microsoft.Management/managementGroups', parameters('targetMG'))]"
     },
 
     "resources": [
