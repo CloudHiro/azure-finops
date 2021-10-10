@@ -56,11 +56,25 @@ This template implement policy at management group scope to to force resources t
 Deploy to azure Auto Scale Vmss:            
 [![Deploy to azure Auto Scale Vmss](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fauto_scale_vmss%2FarmTemplateAutoScaleVMSSRunbook.json)
 
-Deploy to Azure tag last modified:      
+Deploy to Azure tag last modified:
+<details>
+  <summary>Description</summary>
+  <ol>
+This template implement a runbook  that look for Vms and Disks who got modified in the past two weeks and tag them with tag name "last_modified" with tag value of the Caller id.
+  </ol>
+</details>
+
 [![Deploy To Azure tag last modified](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_last_modified%2Ftag_last_modified_past2weeks_arm-template.json)
 
-Deploy to Azure delete unAttached Disks and deallocated Vms:   
-[![Deploy To Azure delete unAttached Disks and deallocated VMs](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Fdelete_unAttachedDisks_deallocatedVMs%2Fdelete_unAttachedDisks_deallocatedVMs_arm-template.json)
+Deploy to Azure tag unattached disks and deallocated Vms:  
+<details>
+  <summary>Description</summary>
+  <ol>
+This template implement a runbook  that look for Vms that in "deallocated/stopped" state over X days and tag them with tag "Candidate - DeleteMe" and all the disks with over X size related to the vm also with "Candidate - DeleteMe".
+  </ol>
+</details>
+
+[![Deploy To Azure tag unattached disks and deallocated VMs](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Fdelete_unAttachedDisks_deallocatedVMs%2Fdelete_unAttachedDisks_deallocatedVMs_arm-template.json)
 
 Deploy to Azure tag created by and created on date:   
 [![Deploy To Azure created by and created on date](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_createdBy_createdOnDate%2Ftag_createdBy_createdOnDate_arm-template.json)
@@ -76,9 +90,17 @@ Deploy To Azure tag unattached:
 [![Deploy To Azure tag unattached](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_deallocated%2FTagDeallocatedVmsAndDisks_arm_runbook.json)
 
 Deploy To Azure get unused subscriptions:  
+<details>
+  <summary>Description</summary>
+  <ol>
+This template implement a runbook script that loops over all the subscriptions and looks for activity logs of users with full user principal names and IP addresses to validate if the subscriptions have been in use in the time defined.
+If unused subscriptions have been found the script exports them to a CSV file in the configured blobs accounts.
+  </ol>
+</details>
+
 [![Deploy To Azure get unused subscriptions](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Funused_subscriptions%2FGet-UnusedSubscriptions_arm_runbook.json)
 
 
 
-Deploy to azure Multiple ARM Templates Policies(Hybrid Benefit SQL/Vm/Vmss/Managed-SQL + Created at tag):            
-[![Deploy to azure Multiple ARM Templates Policies](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fmultiple_arm_polices%2Fmultiple_arm_templates_policies.json)
+<!-- Deploy to azure Multiple ARM Templates Policies(Hybrid Benefit SQL/Vm/Vmss/Managed-SQL + Created at tag):            
+[![Deploy to azure Multiple ARM Templates Policies](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fmultiple_arm_polices%2Fmultiple_arm_templates_policies.json) -->
