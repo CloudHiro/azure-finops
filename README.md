@@ -74,7 +74,7 @@ This template implement a runbook  that look for Vms that in "deallocated/stoppe
   </ol>
 </details>
 
-[![Deploy To Azure tag unattached disks and deallocated VMs](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_unattached_disks_and_deallocated_vms%2Ftag_unattached_disks_and_deallocated_vms-ARM.json)
+[![Deploy To Azure tag unattached disks and deallocated VMs](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_unattached_disks_and_vms%2Ftag_unattached_disks_and_vms-ARM.json)
 
 
 Deploy to Azure delete unattached disks and deallocated Vms:  
@@ -85,7 +85,7 @@ This template implement a runbook  that look for vms and disks with tag "Candida
   </ol>
 </details>
 
-[![Deploy To Azure delete unattached disks and deallocated VMs](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Fdelete_unattached_disks_and_deallocated_vms%2Fdelete_unattached_disks_and_deallocated_vms-ARM.json)
+[![Deploy To Azure delete unattached disks and deallocated VMs](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Fdelete_unattached_disks_and_vms%2Fdelete_unattched_disks_and_vms-ARM.json)
 
 
 Deploy to Azure tag created by and created on date:   
