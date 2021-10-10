@@ -19,7 +19,14 @@ Deploy to azure Hybrid benefit(SQL) policy:
 [![Deploy to azure Hybrid benefit(SQL) policy](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fhybrid_benefit_SQL%2Fhybrid_benefit_sql.json)
 
 
-Deploy to azure Hybrid benefit(Vms) policy:   
+Deploy to azure Hybrid benefit(Vms) policy:
+<details>
+  <summary>Description</summary>
+  <ol>
+This template implement policy at management group scope to to force Hybrid benefit for Vms and Vmss  
+  </ol>
+</details>
+  
 [![Deploy to azure Hybrid benefit(Vms) policy](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fhybrid_benefit_policy%2FARM_for_hybrid_benefit.json)
 
 Deploy to Azure tag last modified:      
