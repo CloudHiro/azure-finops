@@ -1,21 +1,19 @@
-# azure-finops
+# Azure-Finops
 This repository contains Azure ARM templates to create runbooks that run scripts aimed at cost optimization
 
 ## Prerequisites 
 * All scripts assume an automation account was created and it has a service principal assigned to it.  
 * the user running the template must be an automation contributor or owner.
 
+
+
+## ARM-Templates - Policies
+
 Deploy to azure Multiple ARM Templates Policies(Hybrid Benefit SQL/Vm/Vmss/Managed-SQL + Created at tag):            
 [![Deploy to azure Multiple ARM Templates Policies](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fmultiple_arm_polices%2Fmultiple_arm_templates_policies.json)
 
-
-Deploy to azure Auto Scale Vmss:            
-[![Deploy to azure Auto Scale Vmss](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fauto_scale_vmss%2FarmTemplateAutoScaleVMSSRunbook.json)
-
-
 Deploy to azure Hybrid benefit(SQL-Managed instance) policy:         
 [![Deploy to azure Hybrid benefit(SQL-Managed instance)](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fhybrid_benefit_SQL_managed_instance%2Fhybrid_benefit_SQL_managed_instance.json)
-
 
 Deploy to azure Hybrid benefit(SQL) policy:      
 [![Deploy to azure Hybrid benefit(SQL) policy](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fhybrid_benefit_SQL%2Fhybrid_benefit_sql.json)
@@ -27,9 +25,17 @@ Deploy to azure Hybrid benefit(Vms) policy:
 Deploy to Azure tag last modified:      
 [![Deploy To Azure tag last modified](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_last_modified%2Ftag_last_modified_past2weeks_arm-template.json)
 
-
 Deploy to Azure tag created by and created on date:   
 [![Deploy To Azure created by and created on date](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_createdBy_createdOnDate%2Ftag_createdBy_createdOnDate_arm-template.json)
+
+Deploy To Azure tag resources with created at timestamp:  
+[![Deploy To Azure find unused subscriptions](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_created_at%2Ftag_create_at_arm.json)
+
+
+## ARM-Templates - Runbooks
+
+Deploy to azure Auto Scale Vmss:            
+[![Deploy to azure Auto Scale Vmss](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fauto_scale_vmss%2FarmTemplateAutoScaleVMSSRunbook.json)
 
 
 Deploy to Azure delete unAttached Disks and deallocated Vms:   
@@ -49,5 +55,3 @@ Deploy To Azure tag unattached:
 Deploy To Azure get unused subscriptions:  
 [![Deploy To Azure get unused subscriptions](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Funused_subscriptions%2FGet-UnusedSubscriptions_arm_runbook.json)
 
-Deploy To Azure tag resourtces with created at timestamp:  
-[![Deploy To Azure find unused subscriptions](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_created_at%2Ftag_create_at_arm.json)
