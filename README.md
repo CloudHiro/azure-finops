@@ -74,7 +74,7 @@ This template implement a runbook  that look for Vms that in "deallocated/stoppe
   </ol>
 </details>
 
-[![Deploy To Azure tag unattached disks and deallocated VMs](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Fdelete_unAttachedDisks_deallocatedVMs%2Fdelete_unAttachedDisks_deallocatedVMs_arm-template.json)
+[![Deploy To Azure tag unattached disks and deallocated VMs](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_unattached_disks_and_deallocated_vms%2Ftag_unattached_disks_and_deallocated_vms-ARM.json)
 
 Deploy to Azure tag created by and created on date:   
 [![Deploy To Azure created by and created on date](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Ftag_createdBy_createdOnDate%2Ftag_createdBy_createdOnDate_arm-template.json)
