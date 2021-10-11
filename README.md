@@ -7,6 +7,36 @@ This repository contains Azure ARM templates to create runbooks that run scripts
 
 
 
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">ARM-Templates - Policies</a>
+      <ul>
+        <li><a href="#built-with">Hybrid benefit(SQL-Managed instance)</a></li>
+        <li><a href="#built-with">Hybrid benefit(SQL)</a></li>
+        <li><a href="#built-with">Hybrid benefit(Vms)</a></li>
+        <li><a href="#built-with">Tag resources with created at timestamp</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">ARM-Templates - Runbooks</a>
+      <ul>
+        <li><a href="#prerequisites">Auto Scale Vmss</a></li>
+        <li><a href="#installation">Tag last modified</a></li>
+        <li><a href="#installation">Tag reserved disks and deallocated Vms</a></li>
+        <li><a href="#installation">Delete reserved disks and deallocated Vms</a></li>
+        <li><a href="#installation">Right sizing(Vms)</a></li>
+        <li><a href="#installation">Cpu & Memory Utilization(Vms)</a></li>
+        <li><a href="#installation">Get Unused Subscriptions</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
+
+
+get unused subscriptions
 ## ARM-Templates - Policies
 
  Deploy to azure Hybrid benefit(SQL-Managed instance) policy:
