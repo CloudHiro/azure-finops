@@ -13,9 +13,9 @@ This repository contains Azure ARM templates to create runbooks that run scripts
   <summary><h2><b>Table of Contents</h2></summary>
   <ol>
     <li>
-      <a href="#ARM-Templates - Policies">ARM-Templates - Policies</a>
+      <a href="#arm-templates-policies">ARM-Templates - Policies</a>
       <ul>
-        <li><a href="#Deploy to azure Hybrid benefit(SQL-Managed instance) policy">Hybrid benefit(SQL-Managed instance)
+        <li><a href="#deploy-to-azure-hybrid-benefit(sql-managed-instance)-policy">Hybrid benefit(SQL-Managed instance)
         </a></li>
         <li><a href="#built-with">Hybrid benefit(SQL)</a></li>
         <li><a href="#built-with">Hybrid benefit(Vms)</a></li>
