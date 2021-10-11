@@ -7,6 +7,8 @@ This repository contains Azure ARM templates to create runbooks that run scripts
 
 
 
+
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -36,7 +38,6 @@ This repository contains Azure ARM templates to create runbooks that run scripts
 </details>
 
 
-get unused subscriptions
 ## ARM-Templates - Policies
 
  Deploy to azure Hybrid benefit(SQL-Managed instance) policy:
