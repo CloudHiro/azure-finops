@@ -8,15 +8,14 @@ This repository contains Azure ARM templates to create runbooks that run scripts
 
 
 
-
 <!-- TABLE OF CONTENTS -->
 <details>
-  <summary>Table of Contents</summary>
+  <summary><h2><b>Table of Contents</h2></summary>
   <ol>
     <li>
       <a href="#about-the-project">ARM-Templates - Policies</a>
       <ul>
-        <li><a href="#built-with">Hybrid benefit(SQL-Managed instance)</a></li>
+        <li><a href="#Deploy to azure Hybrid benefit(SQL-Managed instance) policy">Hybrid benefit(SQL-Managed instance)</a></li>
         <li><a href="#built-with">Hybrid benefit(SQL)</a></li>
         <li><a href="#built-with">Hybrid benefit(Vms)</a></li>
         <li><a href="#built-with">Tag resources with created at timestamp</a></li>
@@ -37,16 +36,17 @@ This repository contains Azure ARM templates to create runbooks that run scripts
   </ol>
 </details>
 
+<br>
 
 ## ARM-Templates - Policies
 
- Deploy to azure Hybrid benefit(SQL-Managed instance) policy:
-    <details>
-    <summary>Description</summary>
-    <ol>
-    This template implement policy at management group scope to to force Hybrid benefit for Managed SQL instance.  
-    </ol>
-    </details>         
+### Deploy to azure Hybrid benefit(SQL-Managed instance) policy:
+<details>
+<summary>Description</summary>
+<ol>
+This template implement policy at management group scope to to force Hybrid benefit for Managed SQL instance.  
+</ol>
+</details>         
 
 [![Deploy to azure Hybrid benefit(SQL-Managed instance)](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fhybrid_benefit_SQL_managed_instance%2Fhybrid_benefit_SQL_managed_instance.json)
 
