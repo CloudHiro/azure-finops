@@ -86,7 +86,15 @@ This template implement policy at management group scope to to force Hybrid bene
 
 ## ARM-Templates - Runbooks
 
-  Deploy to azure Auto Scale Vmss:            
+  Deploy to azure Auto Scale Vmss:
+      <details>
+    <summary>Description</summary>
+    <ol>
+    This template implement an ARM-Template , creating two python 3 packages, 4 variables and two runbooks in an already exist automation account
+the "list" runbook is creating a csv of all VMSS that not belongs to AKS and are manual scale as candidate for automate scale
+the "modify" runbook is modifying not excluded VMSS (by tags and by not being AKS) to automate scale
+    </ol>
+    </details>
     [![Deploy to azure Auto Scale Vmss](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fauto_scale_vmss%2FarmTemplateAutoScaleVMSSRunbook.json)
 
   Deploy to Azure tag last modified:
