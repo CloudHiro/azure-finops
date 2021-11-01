@@ -25,6 +25,14 @@
             },
             "defaultValue": "true"
         },
+        "TestSubID": {
+            "type": "string",
+            "metadata": {
+                "displayName": "Subscription ID for tests",
+                "description": "subscription id for test run"
+            },
+            "defaultValue": "123456789"
+        },
         "blobContainerName": {
             "type": "string",
             "metadata": {
@@ -91,6 +99,21 @@
         {
             "apiVersion": "2020-01-13-preview",
             "type": "Microsoft.Automation/automationAccounts/runbooks",
+            "name": "[concat(parameters('AutomationAccount'), '/', parameters('name'), '-list-sub-test')]",
+            "location": "[parameters('automationRegion')]",
+            "properties": {
+                "description": "list all manual scale vmss except AKS for a specific test subscription",
+                "runbookType": "Python3",
+                "logProgress": false,
+                "logVerbose": false,
+                "publishContentLink": {
+                    "uri": "https://cloudteam-arm-templates.s3.amazonaws.com/autoscale-vmss/vmss-list-manual-csv-sub.py"
+                }
+            }
+        },
+        {
+             "apiVersion": "2020-01-13-preview",
+            "type": "Microsoft.Automation/automationAccounts/runbooks",
             "name": "[concat(parameters('AutomationAccount'), '/', parameters('name'), '-modify')]",
             "location": "[parameters('automationRegion')]",
             "properties": {
@@ -100,6 +123,21 @@
                 "logVerbose": false,
                 "publishContentLink": {
                     "uri": "https://cloudteam-arm-templates.s3.amazonaws.com/autoscale-vmss/vmss-deploy-autoscale-csv.py"
+                }
+            }
+        },
+        {
+             "apiVersion": "2020-01-13-preview",
+            "type": "Microsoft.Automation/automationAccounts/runbooks",
+            "name": "[concat(parameters('AutomationAccount'), '/', parameters('name'), '-modify-sub-test')]",
+            "location": "[parameters('automationRegion')]",
+            "properties": {
+                "description": "deploy autoscale foe manual VMSS that not excluded by tag and not AKS for the selected test subscription id",
+                "runbookType": "Python3",
+                "logProgress": false,
+                "logVerbose": false,
+                "publishContentLink": {
+                    "uri": "https://cloudteam-arm-templates.s3.amazonaws.com/autoscale-vmss/vmss-deploy-autoscale-csv-sub.py"
                 }
             }
         },
@@ -149,12 +187,23 @@
     	},
         {
             "apiVersion": "2020-01-13-preview",
+            "type": "Microsoft.Automation/automationAccounts/variables",
+            "name": "[concat(parameters('AutomationAccount'), '/TEST_SUB_ID')]",
+            "location": "[parameters('automationRegion')]",
+            "properties": {
+                "description": "subscription id for test run",
+                "isEncrypted": false,
+                "value": "[concat('\"',parameters('TestSubID'),'\"')]"
+            }
+    	},
+        {
+            "apiVersion": "2020-01-13-preview",
             "type": "Microsoft.Automation/automationAccounts/python3Packages",
             "name": "[concat(parameters('AutomationAccount'), '/azure_storage_blob')]",
             "location": "[parameters('automationRegion')]",
             "properties": {
                 "contentLink": {
-                  "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/auto_scale_vmss/armTemplateAutoScaleVMSSRunbook.json"
+                  "uri": "https://cloudteam-arm-templates.s3.amazonaws.com/autoscale-vmss/azure_storage_blob-12.8.1-py2.py3-none-any.whl"
                 }
               }
         },
