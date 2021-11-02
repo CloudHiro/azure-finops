@@ -167,7 +167,7 @@ for sub in subscription_ids:
     for vm in list(vm_list):
         vm_list_size = compute_client.virtual_machine_sizes.list(vm.location)
         for vm_size in list(vm_list_size):
-            if vm.hardware_profile.vm_size in vm_size.name:
+            if vm.hardware_profile.vm_size == vm_size.name:
                 fetch_data_cpu = fetch_metrics_cpu(monitor_client, vm.id)
                 fetch_data_memory = fetch_metrics_memory(monitor_client, vm.id)
                 # Check if Maximum CPU and Maximum Memory are less than 50% in use - if yes than tag them with {'right_size': 'true'}.
@@ -180,8 +180,19 @@ for sub in subscription_ids:
                                 {'right_size': 'true'},
                         }
                     }
-                    # vm_tagging = resource_client.tags.update_at_scope(vm.id, body)
-                blob_client.append_block(f"{fetch_data_cpu[0]},{fetch_data_cpu[1]},{fetch_data_cpu[2]},{(fetch_data_memory[0] / vm_size.memory_in_mb) * 100},{fetch_data_memory[1]},{vm.hardware_profile.vm_size},{vm.location},{lt_50}\n".encode())
+                    vm_tagging = resource_client.tags.update_at_scope(vm.id, body)
+                    # writer.writerow({'Resource id': fetch_data_cpu[0], 'Average CPU': fetch_data_cpu[1],
+                        # 'Maximum CPU': fetch_data_cpu[2],
+                        # 'Average Memory': (fetch_data_memory[0] / vm_size.memory_in_mb) * 100,
+                        # 'Maximum Memory': fetch_data_memory[1], 'Vm Size': vm.hardware_profile.vm_size,
+                        # 'Region': vm.location,
+                        # 'LT 50%': lt_50})
+                    blob_client.append_block(f"{fetch_data_cpu[0]},{fetch_data_cpu[1]},{fetch_data_cpu[2]},{(fetch_data_memory[0] / vm_size.memory_in_mb) * 100},{fetch_data_memory[1]},{vm.hardware_profile.vm_size},{vm.location},{lt_50}\n".encode())
+                else:
+                    blob_client.append_block(f"{fetch_data_cpu[0]},{fetch_data_cpu[1]},{fetch_data_cpu[2]},{(fetch_data_memory[0] / vm_size.memory_in_mb) * 100},{fetch_data_memory[1]},{vm.hardware_profile.vm_size},{vm.location},{lt_50}\n".encode())
+
+                # writer.writerow({'Resource id': fetch_data_cpu[0], 'Average CPU': fetch_data_cpu[1], 'Maximum CPU': fetch_data_cpu[2],'Average Memory': (fetch_data_memory[0]/vm_size.memory_in_mb)*100, 'Maximum Memory': (fetch_data_memory[1]/vm_size.memory_in_mb)*100 ,'Total Memory(MB)': vm_size.memory_in_mb ,'Vm Size': vm.hardware_profile.vm_size ,'Region': vm.location,
+                # 'LT 50%':  "False"})
                 # writer.writerow({'Resource id': fetch_data_cpu[0], 'Average CPU': fetch_data_cpu[1],
                                     # 'Maximum CPU': fetch_data_cpu[2],
                                     # 'Average Memory': (fetch_data_memory[0] / vm_size.memory_in_mb) * 100,
