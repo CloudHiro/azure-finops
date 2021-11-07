@@ -21,7 +21,6 @@
             "location": "[resourceGroup().location]",
             "properties": {
                 "description": "a runbook to tag all vms with low cpu and memory usage",
-                "runbookType": "Powershell",
                 "logProgress": false,
                 "logVerbose": true,
                 "publishContentLink": {
