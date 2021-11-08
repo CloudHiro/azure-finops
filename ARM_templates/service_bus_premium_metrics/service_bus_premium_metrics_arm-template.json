@@ -17,15 +17,15 @@
         {
             "apiVersion": "2019-06-01",
             "type": "Microsoft.Automation/automationAccounts/runbooks",
-            "name": "[concat(parameters('automationAccountName'), '/delete_unAttachedDisks_deallocatedVMs')]",
+            "name": "[concat(parameters('automationAccountName'), '/service_bus_premium_metrics')]",
             "location": "[resourceGroup().location]",
             "properties": {
-                "description": "a runbook to tag all vms with low cpu and memory usage",
-                "runbookType": "Powershell",
+                "description": "a runbook to tag resources with caller id that modified the resurce in the past two weeks",
+                "runbookType": "PowerShell",
                 "logProgress": false,
                 "logVerbose": true,
                 "publishContentLink": {
-                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/tag_unattached_disks_and_vms/tag_unattached_disks_and_vms.ps1",
+                    "uri": "https://raw.githubusercontent.com/CloudHiro/azure-finops/main/ARM_templates/tag_last_modified/tag_last_modified_past2weeks.ps1",
                     "version": "1"
                 }
             }
