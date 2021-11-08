@@ -152,5 +152,17 @@ If unused subscriptions have been found the script exports them to a CSV file in
 
 
 
+  Deploy To Azure service bus premium metrics:  
+<details>
+  <summary>Description</summary>
+  <ol>
+This template implement a runbook script that loops over all the subscriptions and looks for service bus (Premium only) metrics - CPU and Memory , If CPU utilization is less than X then he gets tagged with key name=candidate and key value=resize.
+  </ol>
+</details>
+
+[![Deploy To Azure service bus premium metrics](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2Fmain%2FARM_templates%2Fservice_bus_premium_metrics%2Fservice_bus_premium_metrics_arm-template.json)
+
+
+
 <!-- Deploy to azure Multiple ARM Templates Policies(Hybrid Benefit SQL/Vm/Vmss/Managed-SQL + Created at tag):            
 [![Deploy to azure Multiple ARM Templates Policies](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://ms.portal.azure.com/?feature.customportal=false#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FCloudHiro%2Fazure-finops%2fmain%2FARM_templates%2Fmultiple_arm_polices%2Fmultiple_arm_templates_policies.json) -->
