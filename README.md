@@ -78,6 +78,7 @@ This template implement policy at management group scope to to force Hybrid bene
     <summary>Description</summary>
     <ol>
     This template implement policy at management group scope to to force resources that are created with a tag name "Created_at" and tag value of the date he was created.
+    **NOTE** - Need to change the value of tag in policy definition(to "utcNow()") after ARM is deployed.
     </ol>
     </details>
 
