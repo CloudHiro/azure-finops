@@ -17,7 +17,7 @@
 PARAM(
     [string] $SubscriptionNamePattern = '.*',
     [string] $ConnectionName = 'AzureRunAsConnection',
-    # Replace here your endswith username like = idf.il / greendreamteam.onmicrosoft.com etc.
+    # Replace here your endswith username like = contoso.co.il / contoso.com / contoso.onmicrosoft.com etc.
     [string] $userName = "$*cloudteam.ai"
 )
 
